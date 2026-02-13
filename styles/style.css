@@ -40,6 +40,21 @@ header{
   align-items: center;
 }
 
+.login-link{
+  display: flex;
+  align-items: center;
+
+}
+
+
+.user-icon{ 
+  width: 30px;
+  height: 30px;
+  display: block;
+  margin-right: 8px;
+
+}
+
 .logo{
     font-size: 14px;
     color: var(--logo);
@@ -140,10 +155,35 @@ header{
 
 .latest{
     margin-top: 120px;
+    /* position: relative; */
 }
 .latest h2{
     margin-bottom: 30px;
 }
+
+.latest-header{
+    position: relative;
+    margin-bottom: 30px;
+}
+.latest-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+.arrow-link-slide {
+  display: flex;        
+  align-items: center;   
+  gap: 10px;
+  position: static;      
+}
+.arrow-link_{
+  width: 20px;
+  height: 20px;
+}
+.arrow-link-slide span{
+margin-right: 10px;
+}
+
 .latest-items{
     display: flex;
     justify-content: space-between;
@@ -158,7 +198,42 @@ header{
     align-items: center;
     gap: 25px;
 }
+.latest-item-img {
+    position: relative;
+    width: 360px;
+    height: 240px;
+    overflow: hidden;
+}
+.latest-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.latest-overlay {
+    position: absolute;
+    bottom: -100%;   
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(16,12,12,0.6);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: bottom 0.3s ease;
+}
+.latest-overlay img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+
+.latest-item-img:hover .latest-overlay {
+    bottom: 0;
+}
 .item-text{
     font-weight: 500;
     font-size: 20px;
@@ -179,7 +254,137 @@ header{
     color: #F5556E;
 }
 
-/* Section Feedback */
+
+/* Modal Receip */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.active {
+  display: flex;
+}
+
+/* ===== BACKDROP ===== */
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* ===== CONTENT ===== */
+
+.modal__content {
+  position: relative;
+  width: 90%;
+  max-width: 750px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 10;
+  animation: fadeIn 0.3s ease;
+}
+
+
+/* ===== HEADER ===== */
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal__title {
+  font-size: 20px;
+  margin: 0;
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ===== BODY ===== */
+
+.modal__body {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+}
+
+.modal__image {
+  width: 260px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.modal__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__meta {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 16px;
+}
+
+.modal__section {
+  margin-bottom: 18px;
+}
+
+.modal__section h4 {
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+.modal__section ul {
+  padding-left: 18px;
+  margin: 0;
+}
+
+.modal__section p {
+  margin: 0;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* ===== ANIMATION ===== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal__body {
+    flex-direction: column;
+  }
+
+  .modal__image {
+    width: 100%;
+    height: 220px;
+  }
+}
+
 
 /* Section FeedBack */
 
@@ -187,37 +392,33 @@ header{
   margin-top: 120px;
 }
 
-/* контейнер з двох колонок */
 .feedback_main{
   display: flex;
   align-items: stretch;
-  gap: 0;                 /* важливо: без проміжку */
+  gap: 0;                 
 }
 
-/* ЛІВИЙ БЛОК (фон-картинка + текст) */
 .feedback_item{
-  flex: 1;                /* займає весь простір, що залишився */
-  min-height: 380px;      /* підбери якщо треба */
+  flex: 1;                
+  min-height: 380px;      
   padding: 40px;
 
   background-image: url("../img/BG_latest.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: right center;  /* фруктова частина справа */
+  background-position: right center; 
 }
 
-/* Заголовок зліва */
 .feedback_item h2{
   max-width: 420px;
   margin: 0 0 28px 0;
 
   font-weight: 500;
   font-size: 44px;
-  line-height: 1.1;       /* НЕ роби негативний line-height */
-  color: #121212;         /* або var(--second-color) */
+  line-height: 1.1;       
+  color: #121212;        
 }
 
-/* Блок з автором */
 .feedback_card{
   margin-top: 8px;
   max-width: 360px;
@@ -251,7 +452,15 @@ header{
   color: rgba(18,18,18,0.7);
 }
 
+.arrow-link-feedback{
+  position: absolute;
+  top: 400px;
+  right: 30px;
+  /* transform: rotateY(deg); */
+}
+
 .contributors{
+  position: relative;
   width: 360px;        
   background: #fff;
   padding: 28px 26px;
