@@ -184,19 +184,23 @@ header{
 margin-right: 10px;
 }
 
+.latest-viewport{
+  overflow: hidden;
+  width: 100%;
+}
+
+
 .latest-items{
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    width: 100% ;
+  display: flex;
+  gap: 40px;              /* залишаєш свій gap */
+  width: max-content;     /* щоб доріжка не "розтягувалась" */
+  will-change: transform; /* плавніше */
+  transition: transform 300ms ease;
 }
 
 .latest-item{
-    max-width: 360px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+  flex: 0 0 calc((100% - (2 * var(--latest-gap))) / 3);
+  max-width: none; /* прибираємо max-width: 360px */
 }
 .latest-item-img {
     position: relative;
@@ -205,9 +209,8 @@ margin-right: 10px;
     overflow: hidden;
 }
 .latest-item-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 240px;
 }
 .latest-overlay {
     position: absolute;
@@ -735,7 +738,7 @@ margin-right: 10px;
   }
 
   .latest-item{
-    align-items: flex-start;
+   flex: 0 0 calc((100% - (1 * var(--latest-gap))) / 2);
   }
 
   .feedback_main{
@@ -811,6 +814,10 @@ margin-right: 10px;
 
   .latest-items{
     grid-template-columns: 1fr;
+  }
+
+  .latest-item{
+    flex: 0 0 100%;
   }
 
   .item-text{
